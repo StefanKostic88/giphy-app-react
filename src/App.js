@@ -6,6 +6,8 @@ import MainContent from "./components/MainContent";
 import Header from "./components/Header/Header";
 import SeacrSection from "./components/SeacrSection/SeacrSection";
 
+import GifContext from "./context/gifyContext";
+
 import { generateData } from "./assets/helpers.js";
 
 const API_KEY = "L5BM7L7mWHYNuH1qqjBLi9GNDeLa8n8d";
@@ -38,10 +40,12 @@ function App() {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Header />
-      <SeacrSection onSearchHandler={searchHandler} />
-      <MainAppContainer>
-        <MainContent gifData={gifData} searchInputValue={searchInputValue} />
-      </MainAppContainer>
+      <GifContext.Provider value={{ gifArray: [...gifData] }}>
+        <SeacrSection onSearchHandler={searchHandler} />
+        <MainAppContainer>
+          <MainContent gifData={gifData} searchInputValue={searchInputValue} />
+        </MainAppContainer>
+      </GifContext.Provider>
     </div>
   );
 }

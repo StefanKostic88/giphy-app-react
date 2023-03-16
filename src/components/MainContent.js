@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import GifItem from "./GifItem";
 
 import { generateData } from "../assets/helpers";
 
 import { MainContentStyled } from "./MainContentStyles/MainContentStyles";
+
+import GifContext from "../context/gifyContext";
 const API_KEY = "L5BM7L7mWHYNuH1qqjBLi9GNDeLa8n8d";
 const MainContent = ({ gifData, searchInputValue }) => {
   const [filteredData, setFilteredData] = useState([]);
+  const ctx = useContext(GifContext);
 
   const searchResponse = async (query) => {
     const res = await fetch(
@@ -19,6 +22,8 @@ const MainContent = ({ gifData, searchInputValue }) => {
 
     setFilteredData(() => [...newData]);
   };
+
+  console.log(ctx.gifArray);
 
   useEffect(() => {
     setFilteredData(() => [...gifData]);
